@@ -1,3 +1,4 @@
+using Hangfire;
 using weather_api.Interfaces;
 using weather_api.Services;
 
@@ -10,6 +11,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
+
+builder.Services.AddHangfire(x =>
+{
+    x.UseSqlServerStorage("Server=.;Database=HangfireDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
+});
+builder.Services.AddHangfireServer();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,5 +32,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseHangfireDashboard();
 
 app.Run();
