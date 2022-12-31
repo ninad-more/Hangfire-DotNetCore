@@ -2,6 +2,6 @@
 {
     public interface IWeatherService
     {
-        public int GetTemparature();
+        int GetTemparature();
     }
 }

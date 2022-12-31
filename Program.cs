@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
-
+builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddHangfire(x =>
 {
     x.UseSqlServerStorage("Server=.;Database=HangfireDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False");
